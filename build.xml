@@ -4,30 +4,35 @@
 	<target name="quality" depends="clean,duplicate,complexity,pylint"/>
 	<target name="deploy" depends="clean,release"/>
 	
-	<property name="test-report-folder" value="test-report"/>
+	<property name="PYTHONPATH" value="${basedir}/src;${basedir}/tst;"/>
+	<property name="COVERAGE_REPORT_FOLDER" value="coverage_html_report"/>
 	
 	<target name="clean">
-		<delete dir="${test-report-folder}"/>
+		<delete dir="${COVERAGE_REPORT_FOLDER}"/>
 	</target>
 	
 	<target name="compile">
-			
+		<echo message="No need to compile to *.pyc or *.pyo now."/>
 	</target>
 	
 	<target name="run-testcase">
-		<mkdir dir="${test-report-folder}"/>
-		<exec dir="${test-report-folder}" executable="coverage">
-		  <arg line="erase"/>
+		<exec executable="coverage">
+		 	<arg line="erase"/>
 		</exec>
-		<exec dir="${test-report-folder}" executable="coverage">
-		  <arg line="run -m ../tst/testHelloWorld.py"/>
+		<exec executable="coverage">
+			<env key="PYTHONPATH" value="${PYTHONPATH}"/>
+		  	<arg line="run ${basedir}/tst/runTests.py"/>
 		</exec>
 	</target>
 	
 	<target name="test-coverage">
-		<exec dir="${test-report-folder}" executable="coverage">
-		  <arg line="report"/>
+		<exec executable="coverage">
+			<arg line="report"/>
 		</exec>	
+		<exec executable="coverage">
+			<arg line="html"/>
+		</exec>
+		<echo message="Generating coverage HTML report to ${basedir}/${COVERAGE_REPORT_FOLDER} Done!"/>
 	</target>
 	
 	<target name="duplicate">
