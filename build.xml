@@ -1,0 +1,50 @@
+<project name="ci" default="all">
+	<target name="all" depends="clean,test,quality"/>
+	<target name="test" depends="clean,compile,run-testcase,test-coverage"/>
+	<target name="quality" depends="clean,duplicate,complexity,pylint"/>
+	<target name="deploy" depends="clean,release"/>
+	
+	<property name="test-report-folder" value="test-report"/>
+	
+	<target name="clean">
+		<delete dir="${test-report-folder}"/>
+	</target>
+	
+	<target name="compile">
+			
+	</target>
+	
+	<target name="run-testcase">
+		<mkdir dir="${test-report-folder}"/>
+		<exec dir="${test-report-folder}" executable="coverage">
+		  <arg line="erase"/>
+		</exec>
+		<exec dir="${test-report-folder}" executable="coverage">
+		  <arg line="run -m ../tst/testHelloWorld.py"/>
+		</exec>
+	</target>
+	
+	<target name="test-coverage">
+		<exec dir="${test-report-folder}" executable="coverage">
+		  <arg line="report"/>
+		</exec>	
+	</target>
+	
+	<target name="duplicate">
+			
+	</target>
+		
+	<target name="complexity">
+			
+	</target>
+	
+	<target name="pylint">
+				
+	</target>
+	
+	<!--TODO: -->
+	<target name="release">
+					
+	</target>
+	
+</project>
