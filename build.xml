@@ -6,9 +6,13 @@
 	
 	<property name="PYTHONPATH" value="${basedir}/src;${basedir}/tst;"/>
 	<property name="COVERAGE_REPORT_FOLDER" value="coverage_html_report"/>
+	<property name="PYLINT_REPORT_FOLDER" value="pylint_txt_report"/>
+	<property name="DUPLICATE_REPORT_FOLDER" value="duplicate_html_report"/>
 	
 	<target name="clean">
 		<delete dir="${COVERAGE_REPORT_FOLDER}"/>
+		<delete dir="${PYLINT_REPORT_FOLDER}"/>
+		<delete dir="${DUPLICATE_REPORT_FOLDER}"/>
 	</target>
 	
 	<target name="compile">
@@ -36,7 +40,10 @@
 	</target>
 	
 	<target name="duplicate">
-			
+		<mkdir dir="${DUPLICATE_REPORT_FOLDER}"/>
+		<exec executable="clonedigger">
+			<arg line="${basedir} -o ${DUPLICATE_REPORT_FOLDER}/duplication_output.html"/>
+		</exec>
 	</target>
 		
 	<target name="complexity">
@@ -44,7 +51,10 @@
 	</target>
 	
 	<target name="pylint">
-				
+		<mkdir dir="${PYLINT_REPORT_FOLDER}"/>
+		<exec dir="${PYLINT_REPORT_FOLDER}" executable="pylint">
+			<arg line="${basedir} --files-output=y"/>
+		</exec>			
 	</target>
 	
 	<!--TODO: -->

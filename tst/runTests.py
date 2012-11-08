@@ -12,7 +12,7 @@ import os
 if __name__ == '__main__':
     PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
     os.chdir(PROJECT_PATH)
-    test_file_strings = glob.glob('Test*.py')
+    test_file_strings = glob.glob('test*.py')
     
     module_strings = [str[0:len(str)-3] for str in test_file_strings]
     suites = [unittest.defaultTestLoader.loadTestsFromName(str) for str in module_strings]
