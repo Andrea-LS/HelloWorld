@@ -47,7 +47,10 @@
 	</target>
 		
 	<target name="complexity">
-			
+		<echo message="uncomment it if pymetrics installed on Linux/Win"/>
+		<!--exec executable="pymetrics">
+			<arg line="**/*.py -S -C"/>
+		</exec-->
 	</target>
 	
 	<target name="pylint">
