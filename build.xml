@@ -1,5 +1,5 @@
 <project name="ci" default="all">
-	<target name="all" depends="clean,test,quality"/>
+	<target name="all" depends="clean,test,quality,deploy"/>
 	<target name="test" depends="clean,compile,run-testcase,test-coverage"/>
 	<target name="quality" depends="clean,duplicate,complexity,pylint"/>
 	<target name="deploy" depends="clean,release"/>
@@ -10,11 +10,13 @@
 	<property name="COVERAGE_REPORT_FOLDER" value="coverage_html_report"/>
 	<property name="PYLINT_REPORT_FOLDER" value="pylint_txt_report"/>
 	<property name="DUPLICATE_REPORT_FOLDER" value="duplicate_html_report"/>
+	<property name="RELEASE_FOLDER" value="${basedir}/dist"/>
 	
 	<target name="clean">
 		<delete dir="${COVERAGE_REPORT_FOLDER}"/>
 		<delete dir="${PYLINT_REPORT_FOLDER}"/>
 		<delete dir="${DUPLICATE_REPORT_FOLDER}"/>
+		<delete dir="${RELEASE_FOLDER}"/>
 	</target>
 	
 	<target name="compile">
@@ -62,9 +64,10 @@
 		</exec>			
 	</target>
 	
-	<!--TODO: -->
 	<target name="release">
-					
+		<exec executable="python">
+			<arg line="setup.py bdist_wininst sdist --formats=zip,gztar"/>
+		</exec>		
 	</target>
 	
 </project>

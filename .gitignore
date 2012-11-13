@@ -1,26 +1,19 @@
 *.py[cod]
 
 # Packages
-*.egg
-*.egg-info
-dist
+MANIFEST
 build
-eggs
-
-# Installer logs
-pip-log.txt
+dist
 
 # Unit test / coverage reports
 .coverage
 coverage_html_report
-.tox
-nosetests.xml
 
 # Duplicate report
-*output.html
+duplicate_html_report
 
 # pylint report
-pylint*
+pylint_txt_report
 
 # Mr Developer
 .mr.developer.cfg
