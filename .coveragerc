@@ -7,7 +7,7 @@
 #   coverage html  # creates ./htmlcov/*.html including annotated source
 [run]
 branch = true
-omit = tst/*
+omit = tests/*
 
 [report]
 # Ignore missing source files, i.e. fake template-generated "files"

@@ -4,7 +4,9 @@
 	<target name="quality" depends="clean,duplicate,complexity,pylint"/>
 	<target name="deploy" depends="clean,release"/>
 	
-	<property name="PYTHONPATH" value="${basedir}/src;${basedir}/tst;"/>
+	<property name="SOURCE_FOLDER" value="${basedir}/HelloWorld"/>
+	<property name="TEST_FOLDER" value="${basedir}/tests"/>
+	<property name="PYTHONPATH" value="${SOURCE_FOLDER};${TEST_FOLDER}"/>
 	<property name="COVERAGE_REPORT_FOLDER" value="coverage_html_report"/>
 	<property name="PYLINT_REPORT_FOLDER" value="pylint_txt_report"/>
 	<property name="DUPLICATE_REPORT_FOLDER" value="duplicate_html_report"/>
@@ -25,7 +27,7 @@
 		</exec>
 		<exec executable="coverage">
 			<env key="PYTHONPATH" value="${PYTHONPATH}"/>
-		  	<arg line="run ${basedir}/tst/runTests.py"/>
+		  	<arg line="run ${TEST_FOLDER}/runTests.py"/>
 		</exec>
 	</target>
 	
@@ -56,7 +58,7 @@
 	<target name="pylint">
 		<mkdir dir="${PYLINT_REPORT_FOLDER}"/>
 		<exec dir="${PYLINT_REPORT_FOLDER}" executable="pylint">
-			<arg line="${basedir} --files-output=y"/>
+			<arg line="${SOURCE_FOLDER} --files-output=y"/>
 		</exec>			
 	</target>
 	
